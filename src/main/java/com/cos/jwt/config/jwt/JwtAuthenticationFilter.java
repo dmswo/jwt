@@ -23,7 +23,7 @@ import java.util.Date;
 // /login 요청해서 username, password 전송하면 (post)
 // UsernamePasswordAuthenticationFilter 동작을 함.
 @RequiredArgsConstructor
-public class jwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
     // /login 요청을하면 로그인 시도를 위해서 실행되는 함수.
@@ -80,6 +80,6 @@ public class jwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("username", principalDetails.getUser().getUsername())
                 .sign(Algorithm.HMAC512("cos"));
 
-        response.addHeader("Authorization", jwtToken);
+        response.addHeader("Authorization", "Bearer "+jwtToken);
     }
 }
